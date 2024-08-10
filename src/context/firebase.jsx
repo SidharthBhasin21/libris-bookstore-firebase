@@ -16,6 +16,7 @@ import {
     Firestore,
     getFirestore,
     getDocs,
+    
 } from "firebase/firestore";
 
 import {
@@ -24,12 +25,13 @@ import {
     uploadBytes,
     getDownloadURL,
     deleteObject,
+    
 } from "firebase/storage";
 
 const FirebaseContext = createContext(null);
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAzVY7Bu3CuX1gFz3DRYO7PUZ4V_iJsn9M",
+    apiKey: import.meta.env.FIREBASE_API_KEY,
     authDomain: "libris-a5156.firebaseapp.com",
     projectId: "libris-a5156",
     storageBucket: "libris-a5156.appspot.com",
@@ -120,7 +122,7 @@ export const FirebaseProvider = ({ children }) => {
         return getDownloadURL(imageRef);
     };
     const deleteObj = async () => {
-        remove();
+        
     };
 
     useEffect(() => {

@@ -5,7 +5,6 @@ import { CardGroup } from "react-bootstrap";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
-  const [url, setUrl] = useState("");
   const firebase = useFirebase();
 
   
@@ -21,8 +20,7 @@ const Home = () => {
       <CardGroup>
         {books.map((book) => {
           return (
-            
-            <MyCard {...book.data()} / >
+            <MyCard  key= {book.id} id = {book.id} {...book.data()} / >
           );
         })}
       </CardGroup>
