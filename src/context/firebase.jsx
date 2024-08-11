@@ -32,7 +32,7 @@ import {
 const FirebaseContext = createContext(null);
 
 const firebaseConfig = {
-    apiKey: import.meta.env.FIREBASE_API_KEY,
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: "libris-a5156.firebaseapp.com",
     projectId: "libris-a5156",
     storageBucket: "libris-a5156.appspot.com",
