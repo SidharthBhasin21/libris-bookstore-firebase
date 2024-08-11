@@ -10,7 +10,7 @@ const Home = () => {
   
   useEffect(() => {
     firebase.listAllBooks().then((books) => {
-      console.log(books.docs[0].data())
+      // console.log(books.docs[0].data())
       setBooks(books.docs);
     });
     

@@ -16,6 +16,8 @@ import {
     Firestore,
     getFirestore,
     getDocs,
+    doc,
+    getDoc,
     
 } from "firebase/firestore";
 
@@ -24,7 +26,6 @@ import {
     ref,
     uploadBytes,
     getDownloadURL,
-    deleteObject,
     
 } from "firebase/storage";
 
@@ -50,6 +51,7 @@ const googleProvider = new GoogleAuthProvider();
 
 export const FirebaseProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+
 
     const signUpUserWithEmailAndPassword = (email, password) => {
         createUserWithEmailAndPassword(firebaseAuth, email, password)
@@ -121,9 +123,23 @@ export const FirebaseProvider = ({ children }) => {
         const imageRef = ref(storage, path);
         return getDownloadURL(imageRef);
     };
-    const deleteObj = async () => {
-        
-    };
+    const getBookById = async (id) =>{
+        const docRef = doc(fireStore,'books', id)
+        const result = await getDoc(docRef)
+        return result
+    }
+
+    const placeOrder= async (bookId,qty) => {
+        const collectionRef = collection(fireStore, 'books', bookId,"orders")
+        const result = await addDoc(collectionRef, {
+            userID: user.uid,
+            userEmail: user.email,
+            displayName: user.displayName,
+            userPhotoURL: user.photoURL,
+            qty
+        })
+        return result
+    }
 
     useEffect(() => {
         onAuthStateChanged(firebaseAuth, (user) => {
@@ -146,7 +162,8 @@ export const FirebaseProvider = ({ children }) => {
             handleCreateNewListing,
             listAllBooks,
             getImgURL,
-            deleteObj,
+            getBookById,
+            placeOrder
         }}
         >
         {children}
